@@ -52,10 +52,54 @@
                                 (nvim.buf_set_keymap bufnr :n :<leader>lk "<cmd>lua vim.diagnostic.goto_prev()<CR>" {:noremap true})
                                 (nvim.buf_set_keymap bufnr :n :<leader>la "<cmd>lua vim.lsp.buf.code_action()<CR>" {:noremap true})
                                 (nvim.buf_set_keymap bufnr :v :<leader>la "<cmd>lua vim.lsp.buf.range_code_action()<CR> " {:noremap true})
+
+
+                                (nvim.buf_set_keymap bufnr :n :<leader>w ":w<CR>" {:noremap true})
+                                (nvim.buf_set_keymap bufnr :n :<leader>W ":w!<CR>" {:noremap true})
+                                (nvim.buf_set_keymap bufnr :n :<leader>q ":q<CR>" {:noremap true})
+                                (nvim.buf_set_keymap bufnr :n :<leader>Q ":q!<CR>" {:noremap true})
+                                (nvim.buf_set_keymap bufnr :n :<leader>x ":x<CR>" {:noremap true})
+                                (nvim.buf_set_keymap bufnr :n :<leader>c ":!<CR>" {:noremap true})
+                                (nvim.buf_set_keymap bufnr :n :<leader>d "dd" {:noremap true})
+                                (nvim.buf_set_keymap bufnr :n :<leader>h ":nohlsearch<CR>" {:noremap true})
+                                (nvim.buf_set_keymap bufnr :n :<C-f> ":%s///gc" {:noremap true})
+                                (nvim.buf_set_keymap bufnr :n :<leader>uzi "<c-w>_ | <c-w>|" {:noremap true})
+                                (nvim.buf_set_keymap bufnr :n :<leader>uzo "<c-w>=" {:noremap true})
+                                (nvim.buf_set_keymap bufnr :n :+ "<C-a>" {:noremap true})
+                                (nvim.buf_set_keymap bufnr :n :- "<C-x>" {:noremap true})
+                                (nvim.buf_set_keymap bufnr :n :<C-a> "gg<S-v>G" {:noremap true})
+                                (nvim.buf_set_keymap bufnr :n :ss ":split<CR><C-w>w" {:noremap true})
+                                (nvim.buf_set_keymap bufnr :n :vs ":vsplit<CR><C-w>w" {:noremap true})
+
+                                (nvim.buf_set_keymap bufnr :n :<C-h> "<C-w>h" {:noremap true})
+                                (nvim.buf_set_keymap bufnr :n :<C-j> "<C-w>j" {:noremap true})
+                                (nvim.buf_set_keymap bufnr :n :<C-k> "<C-w>k" {:noremap true})
+                                (nvim.buf_set_keymap bufnr :n :<C-l> "<C-w>l" {:noremap true})
+
+                                (nvim.buf_set_keymap bufnr :i :<C-l> "<right>" {:noremap true})
+                                (nvim.buf_set_keymap bufnr :i :<C-h> "<left>" {:noremap true})
+                                (nvim.buf_set_keymap bufnr :i :<C-j> "<down>" {:noremap true})
+                                (nvim.buf_set_keymap bufnr :i :<C-k> "<up>" {:noremap true})
+
+                                (nvim.buf_set_keymap bufnr :n :<A-left> "<C-w><" {:noremap true})
+                                (nvim.buf_set_keymap bufnr :n :<A-right> "<C-w>>" {:noremap true})
+                                (nvim.buf_set_keymap bufnr :n :<A-up> "<C-w>+" {:noremap true})
+                                (nvim.buf_set_keymap bufnr :n :<A-down> "<C-w>-" {:noremap true})
+
+                                (nvim.buf_set_keymap bufnr :n :<A-k> ":move .-1<Return>==" {:noremap true})
+                                (nvim.buf_set_keymap bufnr :n :<A-j> ":move .+1<Return>==" {:noremap true})
+                                (nvim.buf_set_keymap bufnr :v :<A-k> ":move '<-2<Return>gv=gv" {:noremap true})
+                                (nvim.buf_set_keymap bufnr :v :<A-j> ":move '>+1<Return>gv=gv" {:noremap true})
+                                (nvim.buf_set_keymap bufnr :i :<A-k> "<Esc>:move .-2<Return>==gi" {:noremap true})
+                                (nvim.buf_set_keymap bufnr :i :<A-j> "<Esc>:move .+1<Return>==gi" {:noremap true})
+                                (nvim.buf_set_keymap bufnr :v :< "<gv" {:noremap true})
+                                (nvim.buf_set_keymap bufnr :v :> ">gv" {:noremap true})
+                                (nvim.buf_set_keymap bufnr :i :jk "<ESC>" {:noremap true})
+
                                 ;telescope
-                                (nvim.buf_set_keymap bufnr :n :<leader>lw ":lua require('telescope.builtin').diagnostics()<cr>" {:noremap true})
-                                (nvim.buf_set_keymap bufnr :n :<leader>lr ":lua require('telescope.builtin').lsp_references()<cr>" {:noremap true})
-                                (nvim.buf_set_keymap bufnr :n :<leader>li ":lua require('telescope.builtin').lsp_implementations()<cr>" {:noremap true})))]
+                                (nvim.buf_set_keymap bufnr :n :<leader>fd ":lua require('telescope.builtin').diagnostics()<cr>" {:noremap true})
+                                (nvim.buf_set_keymap bufnr :n :<leader>fr ":lua require('telescope.builtin').lsp_references()<cr>" {:noremap true})
+                                (nvim.buf_set_keymap bufnr :n :<leader>fi ":lua require('telescope.builtin').lsp_implementations()<cr>" {:noremap true})))]
               ;; To add support to more language servers check:
               ;; https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 
