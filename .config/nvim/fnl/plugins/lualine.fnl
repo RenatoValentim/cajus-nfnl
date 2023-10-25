@@ -16,11 +16,14 @@
             (let [lualine (require :lualine)]
               (lualine.setup
                 {:options {:theme "tokyonight"
+                           :disabled_filetypes ["alpha" "dashboard"]
                            :icons_enabled true
                            :section_separators ["" ""]
                            :component_separators ["" ""]}
-                 :sections {:lualine_a []
-                            :lualine_b [[:mode {:upper true}]]
+                 :sections {:lualine_a [[:mode {:upper true}]]
+                            :lualine_b [{1 "b:gitsigns_head"
+                                            :color {:gui :bold}
+                                            :icon ""}]
                             :lualine_c [["FugitiveHead"]
                                         {1 :filename
                                          :file_status true
