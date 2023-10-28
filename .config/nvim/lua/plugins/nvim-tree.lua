@@ -1,28 +1,6 @@
-local _local_1_ = require("nfnl.module")
-local autoload = _local_1_["autoload"]
-local nvim = autoload("nvim")
-local function _2_()
-  local tree = require("nvim-tree")
-  local on_attach
-  local function on_attach0(bufnr)
-    local api = require("nvim-tree.api")
-    local opts
-    local function _3_(desc)
-      return {buffer = bufnr, desc = ("nvim-tree: " .. desc), noremap = true, nowait = true, silent = true}
-    end
-    opts = _3_
-    api.config.mappings.default_on_attach(bufnr)
-    vim.keymap.set("n", "U", api.tree.change_root_to_node, opts("CD"))
-    return vim.keymap.set("n", "u", api.tree.toggle_custom_filter, opts("Toggle Hidden"))
-  end
-  on_attach = on_attach0
-  return tree.setup({on_attach = on_attach, sort_by = "case_sensitive", view = {adaptive_size = true}, renderer = {group_empty = true, indent_markers = {enable = false}, icons = {git_placement = "after", glyphs = {bookmark = "\239\145\186", folder = {default = "\239\132\148", open = "\239\132\149"}}, webdev_colors = false}}, filters = {custom = {"^\\.git$"}}})
+local M = {"kyazdani42/nvim-tree.lua", commit = "59e65d88db177ad1e6a8cffaafd4738420ad20b6", dependencies = {"nvim-tree/nvim-web-devicons"}, event = "VimEnter"}
+M.config = function()
+  local tree_cb = require("nvim-tree.config").nvim_tree_callback
+  return require("nvim-tree").setup({diagnostics = {enable = true, icons = {error = "\238\170\135", hint = "\239\160\181", info = "\239\145\137", warning = "\238\169\172"}, show_on_dirs = true}, git = {enable = true, show_on_dirs = true, show_on_open_dirs = true, timeout = 200, ignore = false}, renderer = {highlight_git = true, highlight_opened_files = "none", icons = {git_placement = "before", glyphs = {default = "\238\152\146", folder = {arrow_closed = "\239\145\138", arrow_open = "\239\145\139", default = "\238\151\191", empty = "\239\132\148", empty_open = "\239\132\149", open = "\239\129\188", symlink = "\239\146\130", symlink_open = "\239\129\188"}, git = {deleted = "\238\171\159", ignored = "\226\151\140", renamed = "\238\171\160", staged = "S", unmerged = "\238\171\190", unstaged = "\239\145\132", untracked = "U"}, symlink = "\238\171\174"}, padding = " ", symlink_arrow = " \226\158\155 "}, indent_markers = {enable = true, icons = {corner = "\226\148\148", edge = "\226\148\130", item = "\226\148\130", none = " "}, inline_arrows = true}, indent_width = 2, root_folder_modifier = ":t", add_trailing = false, full_name = false, group_empty = false}, update_focused_file = {enable = true, update_cwd = true}, view = {adaptive_size = true, mappings = {list = {{cb = tree_cb("edit"), key = {"l", "<CR>", "o"}}, {cb = tree_cb("close_node"), key = "h"}, {cb = tree_cb("vsplit"), key = "v"}}}}})
 end
-local function _4_()
-  nvim.ex.hi("NvimTreeSpecialFile ctermfg=7 guifg=#c6c6c6")
-  nvim.set_keymap("n", "<leader>e", ":NvimTreeToggle<CR>", {noremap = true})
-  nvim.set_keymap("n", "<leader>tf", ":NvimTreeFocus<CR>", {noremap = true})
-  nvim.set_keymap("n", "<leader>tc", ":NvimTreeCollapse<CR>", {noremap = true})
-  return nvim.set_keymap("n", "<leader>tr", ":NvimTreeFindFile<CR>", {noremap = true})
-end
-return {{"nvim-tree/nvim-tree.lua", branch = "master", config = _2_, init = _4_}}
+return M
