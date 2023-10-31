@@ -37,4 +37,6 @@
 (nvim.set_keymap :v :< "<gv" {:noremap true})
 (nvim.set_keymap :v :> ">gv" {:noremap true})
 (nvim.set_keymap :i :jk "<ESC>" {:noremap true})
+(nvim.set_keymap :n :<leader>/ "<cmd>lua require('Comment.api').toggle.linewise.current()<CR>" {:noremap true})
+(nvim.set_keymap :x :<leader>/ "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>" {:noremap true})
 {}

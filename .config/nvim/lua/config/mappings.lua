@@ -1,3 +1,4 @@
+-- [nfnl] Compiled from fnl/config/mappings.fnl by https://github.com/Olical/nfnl, do not edit.
 local _local_1_ = require("nfnl.module")
 local autoload = _local_1_["autoload"]
 local nvim = autoload("nvim")
@@ -38,4 +39,6 @@ nvim.set_keymap("i", "<A-j>", "<Esc>:move .+1<Return>==gi", {noremap = true})
 nvim.set_keymap("v", "<", "<gv", {noremap = true})
 nvim.set_keymap("v", ">", ">gv", {noremap = true})
 nvim.set_keymap("i", "jk", "<ESC>", {noremap = true})
+nvim.set_keymap("n", "<leader>/", "<cmd>lua require('Comment.api').toggle.linewise.current()<CR>", {noremap = true})
+nvim.set_keymap("x", "<leader>/", "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>", {noremap = true})
 return {}
