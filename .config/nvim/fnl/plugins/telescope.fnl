@@ -1,35 +1,50 @@
-(local {: autoload} (require :nfnl.module))
-(local nvim (autoload :nvim))
+(local M {1 :nvim-telescope/telescope.nvim
+          :cmd [:Telescope]
+          :commit :00cf15074a2997487813672a75f946d2ead95eb0
+          :dependencies [{1 :ahmedkhalf/project.nvim
+                          :commit :685bc8e3890d2feb07ccf919522c97f7d33b94e4}
+                         [:nvim-telescope/telescope-file-browser.nvim]]
+          :event :Bufenter})
+(fn M.config []
+  (let [telescope (require :telescope)
+        actions (require :telescope.actions)]
+    (fn telescope-buffer-dir [] (vim.fn.expand "%:p:h"))
 
-[{1 :nvim-telescope/telescope.nvim
-  :dependencies [:nvim-telescope/telescope-ui-select.nvim
-                 :nvim-lua/popup.nvim
-                 :nvim-lua/plenary.nvim]
-  :init (fn []
-          (nvim.set_keymap :n :<leader>ff ":lua require('telescope.builtin').find_files()<CR>" {:noremap true})
-          (nvim.set_keymap :n :<leader>fg ":lua require('telescope.builtin').live_grep()<CR>" {:noremap true})
-          (nvim.set_keymap :n :<leader>fb ":lua require('telescope.builtin').buffers()<CR>" {:noremap true})
-          (nvim.set_keymap :n :<leader>fh ":lua require('telescope.builtin').help_tags()<CR>" {:noremap true})
-          (nvim.set_keymap :n :<leader>fk ":Telescope keymaps<CR>" {:noremap true})
-          (nvim.set_keymap :n :<leader>fs ":Telescope current_buffer_fuzzy_find<CR>" {:noremap true}))
-  :config (fn []
-            (let [telescope (require :telescope)
-                  themes (require :telescope.themes)]
-              (telescope.setup {:defaults {:file_ignore_patterns ["node_modules"]
-                                           :vimgrep_arguments ["rg"
-                                                               "--color=never"
-                                                               "--no-heading"
-                                                               "--with-filename"
-                                                               "--line-number"
-                                                               "--column"
-                                                               "--smart-case"
-                                                               "--iglob"
-                                                               "!.git"
-                                                               "--hidden"]}
-                                :extensions {:ui-select {1 (themes.get_dropdown {})}}
-                                :pickers {:find_files {:find_command ["rg"
-                                                                      "--files"
-                                                                      "--iglob"
-                                                                      "!.git"
-                                                                      "--hidden"]}}})
-              (telescope.load_extension "ui-select")))}]
+    (local fb-actions (. (. (. (require :telescope) :extensions) :file_browser)
+                         :actions))
+    (telescope.setup {:defaults {:file_ignore_patterns [:.git/
+                                                        :node_modules
+                                                        :venv
+                                                        :.venv]
+                                 :mappings {:i {:<C-j> actions.move_selection_next
+                                                :<C-k> actions.move_selection_previous
+                                                :<Down> actions.cycle_history_next
+                                                :<Up> actions.cycle_history_prev}
+                                            :n {:q actions.close}}
+                                 :path_display [:smart]
+                                 :prompt_prefix " "
+                                 :selection_caret " "}
+                      :extensions {:file_browser {:hijack_netrw true
+                                                  :mappings {:i {:<C-w> (fn []
+                                                                          (vim.cmd "normal vbd"))}
+                                                             :n {:/ (fn []
+                                                                      (vim.cmd :startinsert))
+                                                                 :N fb-actions.create
+                                                                 :c fb-actions.copy
+                                                                 :h fb-actions.goto_parent_dir
+                                                                 :m fb-actions.move
+                                                                 :r fb-actions.rename
+                                                                 :x fb-actions.remove}}
+                                                  :theme :dropdown}}})
+    (telescope.load_extension :file_browser)
+    (vim.keymap.set :n :<leader>fe
+                    (fn []
+                      (telescope.extensions.file_browser.file_browser {:cwd (telescope-buffer-dir)
+                                                                       :grouped true
+                                                                       :hidden true
+                                                                       :initial_mode :normal
+                                                                       :layout_config {:height 40}
+                                                                       :path "%:p:h"
+                                                                       :previewer false
+                                                                       :respect_gitignore false})))))
+M	
