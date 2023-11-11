@@ -25,6 +25,11 @@
                               :c {:f [":!" "CMD Filter"]
                                   :l [":" "CMD Mode"]
                                   :name :Commands}
+                              :v {:d [":lua vim.diagnostic.config({ virtual_text = false })<Return>"
+                                      "Disable Virtual Text"]
+                                  :e [":lua vim.diagnostic.config({ virtual_text = true })<Return>"
+                                      "Enable Virtual Text"]
+                                  :name "Virtual Text"}
                               :d [:dd "Delete Line"]
                               :e [":NvimTreeToggle<Return>" :NvimTree]
                               :f {:b [":lua require('telescope.builtin').buffers()<Return>"

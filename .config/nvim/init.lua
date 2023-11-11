@@ -21,4 +21,26 @@ vim.loader.enable()
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 
-require("lazy").setup("plugins")
+require("lazy").setup("plugins", {
+  wait = true,
+  install = { colorscheme = { require("plugins.colorscheme").name }, wait = true },
+  defaults = { lazy = true, version = "57cce98dfdb2f2dd05a0567d89811e6d0505e13b" },
+  ui = { wrap = "true" },
+  change_detection = { enabled = true },
+  debug = false,
+  performance = {
+    rtp = {
+      disabled_plugins = {
+        -- "gzip", -- Plugin for editing compressed files.
+        -- "matchit", -- What is it?
+        --  "matchparen", -- Plugin for showing matching parens
+        --  "netrwPlugin", -- Handles file transfers and remote directory listing across a network
+        --  "tarPlugin", -- Plugin for browsing tar files
+        --  "tohtml", -- Converting a syntax highlighted file to HTML
+        --  "tutor", -- Teaching?
+        --  "zipPlugin", -- Handles browsing zipfiles
+      },
+    },
+  },
+}
+)
