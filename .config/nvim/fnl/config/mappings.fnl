@@ -28,12 +28,14 @@
 (nvim.set_keymap :n :<A-right> "<C-w>>" {:noremap true})
 (nvim.set_keymap :n :<A-up> "<C-w>+" {:noremap true})
 (nvim.set_keymap :n :<A-down> "<C-w>-" {:noremap true})
-(nvim.set_keymap :n :<A-k> ":move .-1<Return>==" {:noremap true})
+
+(nvim.set_keymap :n :<A-k> ":move .-2<Return>==" {:noremap true})
 (nvim.set_keymap :n :<A-j> ":move .+1<Return>==" {:noremap true})
 (nvim.set_keymap :v :<A-k> ":move '<-2<Return>gv=gv" {:noremap true})
 (nvim.set_keymap :v :<A-j> ":move '>+1<Return>gv=gv" {:noremap true})
 (nvim.set_keymap :i :<A-k> "<Esc>:move .-2<Return>==gi" {:noremap true})
 (nvim.set_keymap :i :<A-j> "<Esc>:move .+1<Return>==gi" {:noremap true})
+
 (nvim.set_keymap :v :< "<gv" {:noremap true})
 (nvim.set_keymap :v :> ">gv" {:noremap true})
 (nvim.set_keymap :i :jk "<ESC>" {:noremap true})
