@@ -3,6 +3,7 @@
           :event :VeryLazy})
 (fn M.config []
   (let [which-key {:mappings {";" [":Alpha<Return>" :Dashboard]
+                              :N [":e $MYVIMRC <CR>" "Open neovim config file"]
                               :Q [":q!<Return>" "Force quit"]
                               :W [":w!<Return>" "Force save"]
                               :a [":Lazy<Return>" :Lazy]
@@ -25,11 +26,6 @@
                               :c {:f [":!" "CMD Filter"]
                                   :l [":" "CMD Mode"]
                                   :name :Commands}
-                              :v {:d [":lua vim.diagnostic.config({ virtual_text = false })<Return>"
-                                      "Disable Virtual Text"]
-                                  :e [":lua vim.diagnostic.config({ virtual_text = true })<Return>"
-                                      "Enable Virtual Text"]
-                                  :name "Virtual Text"}
                               :d [:dd "Delete Line"]
                               :e [":NvimTreeToggle<Return>" :NvimTree]
                               :f {:b [":lua require('telescope.builtin').buffers()<Return>"
@@ -106,9 +102,23 @@
                                           "List quick fix"]
                                       :t [":TodoTelescope<Return>"
                                           "List all todos whit telescope"]}
+                                  :w {:h [":wincmd H<Return>"
+                                          "Move current split window to the far left"]
+                                      :j [":wincmd J<Return>"
+                                          "Move current split window to the very bottom"]
+                                      :k [":wincmd K<Return>"
+                                          "Move current split window to the very top"]
+                                      :l [":wincmd L<Return>"
+                                          "Move current split window to the far right"]
+                                      :name "Move window"}
                                   :z {:i ["<c-w>_ | <c-w>|" "Zoom in screen"]
                                       :name "Zoom screen"
                                       :o [:<c-w>= "Zoom out screen"]}}
+                              :v {:d [":lua vim.diagnostic.config({ virtual_text = false })<Return>"
+                                      "Disable Virtual Text"]
+                                  :e [":lua vim.diagnostic.config({ virtual_text = true })<Return>"
+                                      "Enable Virtual Text"]
+                                  :name "Virtual Text"}
                               :w [":w<Return>" :Save]
                               :x [":x<Return>" "Save quit"]}
                    :opts {:buffer nil
